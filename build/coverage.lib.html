@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-gulp-asset/node_modules/gulp-asset/index.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-gulp-asset">npmtest-gulp-asset (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-gulp-asset/node_modules/gulp-asset/index.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">20% <small>(22 / 110)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">3.77% <small>(2 / 53)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">6.67% <small>(1 / 15)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">20.37% <small>(22 / 108)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-gulp-asset/node_modules/gulp-asset/</a> &#187; index.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * gulp-asset
+ *
+ * Inspired by "gulp-rev" and "gulp-replace" modules, some of their code is used in this module.
+ * This module was created as an adaptation to both create md5 revision files and replace
+ * all "asset://" urls within the contents of the files with the new revision filenames.
+ *
+ * You should run .rev() on all tasks where you want a new filename to be created based on md5 hash of contents (ie, img, css, fonts, etc)
+ * You should run .replace() on all tasks where you want them scanned for asset:// urls (ie, css, html, etc)
+ */
+&nbsp;
+var crypto = require('crypto');
+var path = require('path');
+var gutil = require('gulp-util');
+var through = require('through2');
+var fs = require('fs');
+var _ = require('underscore');
+var pkg = require('./package.json');
+var version = pkg.version;
+&nbsp;
+// Use .config({}) command to modify these defaults
+var defaults = {
+	prefix: '', // can be string or array of different prefixes.
+	src: 'src', // specify where your src code is located
+	dest: 'dist', // specify where your src code is located
+	assetPath: '/assets/', // specify where you
+	manifest: 'manifest.js', // filename format for saving the manifest file (a revision number will be put on it)
+	globalVar: '__assets', // the global var to assign manifest to. It will attach it to the 'window' (ie, window.__assets).
+	// @TODO: In future these values could be determined from the size of the project directory
+	interval: 100, // change the interval or repeat value for projects that are larger and take more time for all assets to complete
+	repeat: 10,
+	cleanup: true, // true means it will clean old files when they are regenerated by new commands (helpful with 'watch' plugin)
+	hash: true // enable/disable revision hashing. can be helpful during development if you don't want hashes in filenames
+};
+&nbsp;
+// Create empty manifest to keep track of files being processed and their rev filename
+var manifest = {};
+&nbsp;
+// We define an index for use in giving manifest unique number that can
+// then be modulus switched on if there are multiple prefix passed in
+// This way the assets will always go to the same prefix url
+var index = 0;
+&nbsp;
+// Method to apply new configuration over the default.
+var config = <span class="fstat-no" title="function not covered" >function(opts) {</span>
+<span class="cstat-no" title="statement not covered" >	defaults = _.defaults(opts, defaults);</span>
+}
+&nbsp;
+function md5(opts, str) {
+	var shouldHash = typeof opts.hash != 'undefined' ? <span class="branch-0 cbranch-no" title="branch not covered" >opts.hash </span>: defaults.hash;
+	return shouldHash ? crypto.createHash('md5').update(str, 'utf8').digest('hex').slice(0, 8) : <span class="branch-1 cbranch-no" title="branch not covered" >undefined;</span>
+}
+&nbsp;
+// Manifest file name creation
+var manifestRev = md5({}, ('' + +(new Date())));
+<span class="fstat-no" title="function not covered" >function manifestFileName(opts) {</span>
+<span class="cstat-no" title="statement not covered" >	opts = opts || {};</span>
+<span class="cstat-no" title="statement not covered" >	var ext = path.extname(defaults.manifest);</span>
+<span class="cstat-no" title="statement not covered" >	var assetPath = (opts.assetPath || defaults.assetPath);</span>
+<span class="cstat-no" title="statement not covered" >	var basePath = assetPath + path.basename(defaults.manifest).replace(ext, '');</span>
+<span class="cstat-no" title="statement not covered" >	var output = typeof manifestRev !== 'undefined' ? basePath + '-' + manifestRev + ext : basePath + ext;</span>
+<span class="cstat-no" title="statement not covered" >	return output;</span>
+};
+&nbsp;
+// Setup method to write the manifest file. It uses a timeout to attempt to reduce
+// number of writes that are performed.
+var manifestTimeout;
+<span class="fstat-no" title="function not covered" >function writeManifest() {</span>
+<span class="cstat-no" title="statement not covered" >	if (manifestTimeout) {</span>
+<span class="cstat-no" title="statement not covered" >		clearTimeout(manifestTimeout);</span>
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	manifestTimeout = setTimeout(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >		var assets = {};</span>
+<span class="cstat-no" title="statement not covered" >		_.keys(manifest).forEach(<span class="fstat-no" title="function not covered" >function(key) {</span></span>
+<span class="cstat-no" title="statement not covered" >			assets[key] = manifest[key].dest;</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		var filepath = path.join(defaults.dest, manifestFileName());</span>
+<span class="cstat-no" title="statement not covered" >		fs.writeFile(filepath, ';window.' + defaults.globalVar + ' = ' + JSON.stringify(assets) + ';');</span>
+	}, 200);
+}
+&nbsp;
+// Gets md5 from file contents and writes new filename with hash included to destinations
+var rev = <span class="fstat-no" title="function not covered" >function(opts) {</span>
+<span class="cstat-no" title="statement not covered" >	var opts = opts || {};</span>
+<span class="cstat-no" title="statement not covered" >	var shouldHash = typeof opts.hash != 'undefined' ? opts.hash : defaults.hash;</span>
+<span class="cstat-no" title="statement not covered" >	var prefix = _.flatten([defaults.prefix]);</span>
+<span class="cstat-no" title="statement not covered" >	var shouldPrefix = typeof opts.shouldPrefix != 'undefined' ? opts.shouldPrefix : true;</span>
+<span class="cstat-no" title="statement not covered" >	return through.obj(<span class="fstat-no" title="function not covered" >function(file, enc, cb) {</span></span>
+<span class="cstat-no" title="statement not covered" >		var originalPath = file.path;</span>
+&nbsp;
+		// Get hash of contents
+<span class="cstat-no" title="statement not covered" >		var hash = md5(opts, file.contents.toString());</span>
+&nbsp;
+		// Construct new filename
+<span class="cstat-no" title="statement not covered" >		var ext = path.extname(file.path);</span>
+<span class="cstat-no" title="statement not covered" >		var basePath = path.basename(file.path, ext);</span>
+<span class="cstat-no" title="statement not covered" >		var filename = typeof hash !== 'undefined' ? basePath + '-' + hash + ext : basePath + ext;</span>
+<span class="cstat-no" title="statement not covered" >		file.path = path.join(path.dirname(file.path), filename);</span>
+&nbsp;
+		// Add to manifest
+<span class="cstat-no" title="statement not covered" >		var base = path.join(file.cwd, defaults.src);</span>
+<span class="cstat-no" title="statement not covered" >		var key = originalPath.replace(base, '');</span>
+&nbsp;
+		// @TODO: Instead of this it could use "glob" module to regex delete files
+		// Check for existing value and whether cleanup is set
+<span class="cstat-no" title="statement not covered" >		var existing = manifest[key];</span>
+<span class="cstat-no" title="statement not covered" >		if (existing &amp;&amp; existing.src &amp;&amp; defaults.cleanup) {</span>
+			// Delete the file
+<span class="cstat-no" title="statement not covered" >			fs.unlink(path.join(file.cwd, defaults.dest, existing.src));</span>
+		} else <span class="cstat-no" title="statement not covered" >if (defaults.cleanup &amp;&amp; shouldHash) {</span>
+			// Check if cleanup and hash enabled then we can remove any non hashed version from dest directory
+<span class="cstat-no" title="statement not covered" >			var nonHashPath = path.join(path.dirname(originalPath), basePath + ext).replace(base, '');</span>
+<span class="cstat-no" title="statement not covered" >			var absPath = path.join(file.cwd, defaults.dest, nonHashPath);</span>
+<span class="cstat-no" title="statement not covered" >			fs.exists(absPath, <span class="fstat-no" title="function not covered" >function(exists) {</span></span>
+<span class="cstat-no" title="statement not covered" >				if (!exists) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >				fs.unlink(absPath);</span>
+			});
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		var filePrefix = shouldPrefix ? prefix[index % prefix.length] : '';</span>
+&nbsp;
+		// Finally add new value to manifest
+<span class="cstat-no" title="statement not covered" >		var src = file.path.replace(base, '');</span>
+<span class="cstat-no" title="statement not covered" >		manifest[key] = {</span>
+			index: index++,
+			src: src,
+			dest: filePrefix + src
+		};
+&nbsp;
+		// Write manifest file
+<span class="cstat-no" title="statement not covered" >		writeManifest();</span>
+&nbsp;
+		// Return and continue
+<span class="cstat-no" title="statement not covered" >		this.push(file);</span>
+<span class="cstat-no" title="statement not covered" >		cb();</span>
+	});
+}
+&nbsp;
+// Scans the contents of the file and replaces all asset:// urls with the correct revision url
+var replace = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >	var prefix = _.flatten([defaults.prefix]);</span>
+<span class="cstat-no" title="statement not covered" >	var interval = defaults.interval;</span>
+<span class="cstat-no" title="statement not covered" >	var assetPath = defaults.assetPath;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	return through.obj(<span class="fstat-no" title="function not covered" >function(file, enc, cb) {</span></span>
+<span class="cstat-no" title="statement not covered" >		var newContents = file.contents;</span>
+<span class="cstat-no" title="statement not covered" >		var _this = this;</span>
+<span class="cstat-no" title="statement not covered" >		var completed = {};</span>
+<span class="cstat-no" title="statement not covered" >		var repeats = 0;</span>
+<span class="cstat-no" title="statement not covered" >		(<span class="fstat-no" title="function not covered" >function recurse() {</span></span>
+<span class="cstat-no" title="statement not covered" >			var failed = repeats &gt;= defaults.repeat;</span>
+&nbsp;
+			// Find how many are files are still missing from the manifest,
+			// if some are missing don't continue, bypassing the regex should hopefully be a less expensive task
+<span class="cstat-no" title="statement not covered" >			if (!_.isEmpty(completed)) {</span>
+<span class="cstat-no" title="statement not covered" >				var keys = _.keys(completed);</span>
+<span class="cstat-no" title="statement not covered" >				var missing = 0;</span>
+<span class="cstat-no" title="statement not covered" >				keys.forEach(<span class="fstat-no" title="function not covered" >function(key) {</span></span>
+<span class="cstat-no" title="statement not covered" >					missing += typeof manifest[key] == 'undefined';</span>
+				});
+<span class="cstat-no" title="statement not covered" >				if (missing &gt; 0 &amp;&amp; !failed) {</span>
+<span class="cstat-no" title="statement not covered" >					repeats++;</span>
+<span class="cstat-no" title="statement not covered" >					setTimeout(recurse, interval);</span>
+<span class="cstat-no" title="statement not covered" >					return;</span>
+				}
+			}
+&nbsp;
+			// If there are none missing then scan contents
+<span class="cstat-no" title="statement not covered" >			newContents = new Buffer(String(file.contents).replace(/\b((asset:\/\/?)[^#!%&amp;*$?'"\s()&lt;&gt;]*(?:\([\w\d]*\)|([\.\w*]|\/)))/ig, <span class="fstat-no" title="function not covered" >function(match) {</span></span>
+				// Replace placeholder with correct base
+<span class="cstat-no" title="statement not covered" >				var filepath = match.replace('asset://', assetPath);</span>
+&nbsp;
+				// Handle matches where it is just the base protocol to replace
+				// Useful for your javascript expressions wher url is constructed using expression
+<span class="cstat-no" title="statement not covered" >				if (match == 'asset://') {</span>
+<span class="cstat-no" title="statement not covered" >					return filepath;</span>
+				}
+&nbsp;
+				// If manifest then return special manifest path
+<span class="cstat-no" title="statement not covered" >				if (filepath == path.join(assetPath, defaults.manifest)) {</span>
+<span class="cstat-no" title="statement not covered" >					return prefix[0] + manifestFileName(opts);</span>
+				}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				completed[filepath] = false;</span>
+&nbsp;
+				// Check if file already in manifest, if it is, use it
+<span class="cstat-no" title="statement not covered" >				var found = manifest[filepath];</span>
+&nbsp;
+				// Else wait for it
+<span class="cstat-no" title="statement not covered" >				if (!found) {</span>
+					// @TODO: We could insert a 404 url in here if "failed" is true, probs not needed though
+<span class="cstat-no" title="statement not covered" >					return match;</span>
+				}
+				// Get output filename and index for use in switching between prefixes
+<span class="cstat-no" title="statement not covered" >				var output = found.dest;</span>
+<span class="cstat-no" title="statement not covered" >				completed[filepath] = true;</span>
+<span class="cstat-no" title="statement not covered" >				return output;</span>
+			}));
+&nbsp;
+			// If all matches have been completely replaced, finish, else recurse
+<span class="cstat-no" title="statement not covered" >			if (_.indexOf(_.values(completed), false) == -1 || failed) {</span>
+<span class="cstat-no" title="statement not covered" >				if (failed) {</span>
+<span class="cstat-no" title="statement not covered" >					var errored = _.compact(_.map(completed, <span class="fstat-no" title="function not covered" >function(val, key) {</span> <span class="cstat-no" title="statement not covered" >return !val ? gutil.colors.red(key): undefined }</span>));</span>
+<span class="cstat-no" title="statement not covered" >					var fileName = path.join(file.path.replace(file.cwd, '').replace(defaults.src, defaults.dest));</span>
+<span class="cstat-no" title="statement not covered" >					var message = gutil.colors.yellow(fileName) + ': Stalled or unable to process asset url: ' + errored.join(', ') + '. This can occur if the file doesn\'t exist or is very large and takes time to process. You can updated the "interval" option or the "repeats".';</span>
+<span class="cstat-no" title="statement not covered" >					_this.emit('error', new gutil.PluginError('gulp-asset', message));</span>
+				}
+<span class="cstat-no" title="statement not covered" >				file.contents = newContents;</span>
+<span class="cstat-no" title="statement not covered" >				_this.push(file);</span>
+<span class="cstat-no" title="statement not covered" >				cb();</span>
+			} else {
+<span class="cstat-no" title="statement not covered" >				repeats++;</span>
+<span class="cstat-no" title="statement not covered" >				setTimeout(recurse, interval);</span>
+			}
+		})();
+	});
+}
+&nbsp;
+module.exports = {
+	version: version,
+	config: config,
+	rev: rev,
+	replace: replace
+};
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 18 2017 01:15:49 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
